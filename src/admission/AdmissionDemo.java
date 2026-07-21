@@ -2,10 +2,12 @@ package admission;
 
 import builder.Student;
 
+// Demo for the admission flow — integrates Singleton, Builder, and Factory patterns
 public class AdmissionDemo {
     public static void main(String[] args) {
         AdmissionService service = new AdmissionService();
 
+        // Admit a student — internally uses Singleton, Builder, and Factory
         Student student = service.admitStudent(
                 101,
                 "Ram",

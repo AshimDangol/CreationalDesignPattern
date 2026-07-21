@@ -1,8 +1,10 @@
 package builder;
 
 // Demo showing the Builder fix: fluent API makes object creation clear and flexible
+// Each setter reveals what value it sets — self-documenting code
 public class BuilderDemo {
     public static void main(String[] args) {
+        // Fluent method chaining with named setter methods for readability
         Student student = new Student.Builder()
                 .studentId(101)
                 .name("Ram")

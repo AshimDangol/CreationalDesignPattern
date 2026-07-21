@@ -1,17 +1,18 @@
 package singleton;
 
-// Singleton: ensures only one instance exists throughout the application
+// Singleton pattern: ensures only one instance exists throughout the application
+// Eager initialization guarantees thread safety without synchronized blocks
 public class CollegeConfig {
 
-    // Eagerly created single instance (thread-safe by default)
-    private static CollegeConfig instance = new CollegeConfig();
+    // Eagerly created single instance (JVM guarantees single initialization)
+    private static final CollegeConfig instance = new CollegeConfig();
 
     private String collegeName;
     private String systemVersion;
 
-    // Private constructor prevents external instantiation
+    // Private constructor prevents external instantiation via 'new'
     private CollegeConfig() {
-        this.collegeName = "ABC College";
+        this.collegeName = "pcps college";
         this.systemVersion = "1.0";
     }
 

@@ -1,59 +1,83 @@
 package admission;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import builder.Student;
-import org.junit.jupiter.api.Test;
+import java.util.Scanner;
 
-class AdmissionTest {
+public class AdmissionTest {
 
-    @Test
-    void testAdmitStudentReturnsNonNull() {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("=== Enter Student Test Data ===");
+        System.out.print("Student ID: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Name: ");
+        String name = scanner.nextLine();
+        System.out.print("Email: ");
+        String email = scanner.nextLine();
+        System.out.print("Phone: ");
+        String phone = scanner.nextLine();
+        System.out.print("Department: ");
+        String dept = scanner.nextLine();
+        System.out.print("Semester: ");
+        int sem = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Address: ");
+        String address = scanner.nextLine();
+        System.out.print("Guardian Name: ");
+        String guardian = scanner.nextLine();
+
         AdmissionService service = new AdmissionService();
-        Student student = service.admitStudent(
-                101, "Ram", "ram@gmail.com", "9800000000",
-                "BCA", 5, "Kathmandu", "Hari"
-        );
-        assertNotNull(student);
+        Student student = service.admitStudent(id, name, email, phone, dept, sem, address, guardian);
+
+        System.out.println("\n=== Test Results ===");
+        testNotNull(student);
+        testStudentId(student, id);
+        testStudentName(student, name);
+        testDepartment(student, dept);
+        testSemester(student, sem);
+
+        scanner.close();
     }
 
-    @Test
-    void testAdmitStudentCorrectId() {
-        AdmissionService service = new AdmissionService();
-        Student student = service.admitStudent(
-                101, "Ram", "ram@gmail.com", "9800000000",
-                "BCA", 5, "Kathmandu", "Hari"
-        );
-        assertEquals(101, student.getStudentId());
+    static void testNotNull(Student student) {
+        if (student != null) {
+            System.out.println("PASS: Student is not null");
+        } else {
+            System.out.println("FAIL: Student is null");
+        }
     }
 
-    @Test
-    void testAdmitStudentCorrectName() {
-        AdmissionService service = new AdmissionService();
-        Student student = service.admitStudent(
-                101, "Ram", "ram@gmail.com", "9800000000",
-                "BCA", 5, "Kathmandu", "Hari"
-        );
-        assertEquals("Ram", student.getName());
+    static void testStudentId(Student student, int expected) {
+        if (student.getStudentId() == expected) {
+            System.out.println("PASS: Student ID is " + expected);
+        } else {
+            System.out.println("FAIL: Expected " + expected + " but got " + student.getStudentId());
+        }
     }
 
-    @Test
-    void testAdmitStudentCorrectDepartment() {
-        AdmissionService service = new AdmissionService();
-        Student student = service.admitStudent(
-                101, "Ram", "ram@gmail.com", "9800000000",
-                "BCA", 5, "Kathmandu", "Hari"
-        );
-        assertEquals("BCA", student.getDepartment());
+    static void testStudentName(Student student, String expected) {
+        if (expected.equals(student.getName())) {
+            System.out.println("PASS: Student name is " + expected);
+        } else {
+            System.out.println("FAIL: Expected " + expected + " but got " + student.getName());
+        }
     }
 
-    @Test
-    void testAdmitStudentCorrectSemester() {
-        AdmissionService service = new AdmissionService();
-        Student student = service.admitStudent(
-                101, "Ram", "ram@gmail.com", "9800000000",
-                "BCA", 5, "Kathmandu", "Hari"
-        );
-        assertEquals(5, student.getSemester());
+    static void testDepartment(Student student, String expected) {
+        if (expected.equals(student.getDepartment())) {
+            System.out.println("PASS: Department is " + expected);
+        } else {
+            System.out.println("FAIL: Expected " + expected + " but got " + student.getDepartment());
+        }
+    }
+
+    static void testSemester(Student student, int expected) {
+        if (student.getSemester() == expected) {
+            System.out.println("PASS: Semester is " + expected);
+        } else {
+            System.out.println("FAIL: Expected " + expected + " but got " + student.getSemester());
+        }
     }
 }

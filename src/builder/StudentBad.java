@@ -1,6 +1,7 @@
 package builder;
 
-// Bad design: telescoping constructor — hard to read and easy to swap arguments by mistake
+// Bad design: telescoping constructor with 8 parameters — hard to read and easy to swap arguments
+// Compare with Student.java which uses the Builder pattern for readable object creation
 public class StudentBad {
 
     private int studentId;
@@ -12,6 +13,7 @@ public class StudentBad {
     private String address;
     private String guardianName;
 
+    // Single constructor with all fields — error-prone, no way to set fields selectively
     public StudentBad(
             int studentId,
             String name,

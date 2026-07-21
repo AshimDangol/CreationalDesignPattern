@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 class CollegeConfigTest {
 
     @Test
+    // Verify that two calls to getInstance() return the exact same object (reference equality)
     void testSingleInstance() {
         CollegeConfig instance1 = CollegeConfig.getInstance();
         CollegeConfig instance2 = CollegeConfig.getInstance();
@@ -15,18 +16,21 @@ class CollegeConfigTest {
     }
 
     @Test
+    // Verify the default college name is set correctly
     void testCollegeName() {
         CollegeConfig instance = CollegeConfig.getInstance();
-        assertEquals("ABC College", instance.getCollegeName(), "College name should be ABC College");
+        assertEquals("pcps college", instance.getCollegeName(), "College name should be pcps college");
     }
 
     @Test
+    // Verify the default system version is set correctly
     void testSystemVersion() {
         CollegeConfig instance = CollegeConfig.getInstance();
         assertEquals("1.0", instance.getSystemVersion(), "System version should be 1.0");
     }
 
     @Test
+    // Verify that getInstance() never returns null
     void testInstanceNotNull() {
         CollegeConfig instance = CollegeConfig.getInstance();
         assertNotNull(instance, "Singleton instance should not be null");

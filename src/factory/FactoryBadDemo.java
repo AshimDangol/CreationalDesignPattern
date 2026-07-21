@@ -1,6 +1,7 @@
 package factory;
 
-// Demo showing the problem: creation logic is scattered inside conditionals
+// Demo showing the problem: instance creation and business logic are mixed together
+// Adding a new type means editing NotificationServiceBad itself
 public class FactoryBadDemo {
 
     public static void main(String[] args) {

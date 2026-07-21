@@ -1,9 +1,10 @@
 package singleton;
 
-// Demo showing the problem: two separate objects are created
+// Demo showing the problem: calling 'new' twice creates two separate objects
 public class SingletonBadDemo {
 
     public static void main(String[] args) {
+        // Each call to 'new' creates a distinct object
         CollegeConfigBad config1 = new CollegeConfigBad();
         CollegeConfigBad config2 = new CollegeConfigBad();
 

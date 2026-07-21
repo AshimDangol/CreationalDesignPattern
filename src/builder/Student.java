@@ -1,6 +1,7 @@
 package builder;
 
 // Builder pattern: constructs a complex object step by step with readable method chaining
+// All fields are final — the object is fully initialized once built
 public class Student {
     private final int studentId;
     private final String name;
@@ -11,6 +12,7 @@ public class Student {
     private final String address;
     private final String guardianName;
 
+    // Private constructor — only the Builder can create Student instances
     private Student(Builder builder) {
         this.studentId = builder.studentId;
         this.name = builder.name;
@@ -31,6 +33,7 @@ public class Student {
     public String getAddress() { return address; }
     public String getGuardianName() { return guardianName; }
 
+    // Inner static Builder class — each setter returns 'this' for fluent chaining
     public static class Builder {
         private int studentId;
         private String name;
@@ -50,6 +53,7 @@ public class Student {
         public Builder address(String address) { this.address = address; return this; }
         public Builder guardianName(String guardianName) { this.guardianName = guardianName; return this; }
 
+        // Terminal method — constructs the immutable Student object
         public Student build() {
             return new Student(this);
         }
