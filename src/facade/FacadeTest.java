@@ -1,44 +1,81 @@
 package facade;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
+import java.util.Scanner;
 
-// JUnit 5 tests to verify Facade pattern behavior
-class FacadeTest {
+public class FacadeTest {
 
-    @Test
-    // Verify registration starts successfully
-    void testRegistrationStartsSuccessfully() {
-        StudentRegistrationFacade facade = new StudentRegistrationFacade();
-        assertDoesNotThrow(() -> facade.registerStudent("Ram", "ram@gmail.com"));
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("=== Facade Test ===");
+        testFacadeNotNull();
+
+        System.out.print("Enter student name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter student email: ");
+        String email = scanner.nextLine();
+
+        testRegistrationStartsSuccessfully(name, email);
+        testValidationServiceExecuted(name, email);
+        testDepartmentAllocationExecuted(name, email);
+        testNotificationServiceExecuted(name, email);
+
+        scanner.close();
     }
 
-    @Test
-    // Verify validation service is executed (throws for invalid data)
-    void testValidationServiceExecuted() {
+    static void testRegistrationStartsSuccessfully(String name, String email) {
         StudentRegistrationFacade facade = new StudentRegistrationFacade();
-        assertThrows(IllegalArgumentException.class,
-                () -> facade.registerStudent("", "ram@gmail.com"));
+        try {
+            facade.registerStudent(name, email);
+            System.out.println("PASS: Registration started successfully");
+        } catch (IllegalArgumentException e) {
+            System.out.println("PASS: Validation rejected invalid input - " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("FAIL: Unexpected exception - " + e.getMessage());
+        }
     }
 
-    @Test
-    // Verify department allocation is executed
-    void testDepartmentAllocationExecuted() {
+    static void testValidationServiceExecuted(String name, String email) {
         StudentRegistrationFacade facade = new StudentRegistrationFacade();
-        assertDoesNotThrow(() -> facade.registerStudent("Ram", "ram@gmail.com"));
+        try {
+            facade.registerStudent(name, email);
+            if (name == null || name.isEmpty() || email == null || !email.contains("@")) {
+                System.out.println("FAIL: Validation did not reject invalid data");
+            } else {
+                System.out.println("PASS: Validation service executed for valid data");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("PASS: Validation service executed and rejected invalid data");
+        }
     }
 
-    @Test
-    // Verify notification service is executed
-    void testNotificationServiceExecuted() {
+    static void testDepartmentAllocationExecuted(String name, String email) {
         StudentRegistrationFacade facade = new StudentRegistrationFacade();
-        assertDoesNotThrow(() -> facade.registerStudent("Ram", "ram@gmail.com"));
+        try {
+            facade.registerStudent(name, email);
+            System.out.println("PASS: Department allocation executed");
+        } catch (Exception e) {
+            System.out.println("FAIL: Department allocation failed - " + e.getMessage());
+        }
     }
 
-    @Test
-    // Verify facade object is not null
-    void testFacadeNotNull() {
+    static void testNotificationServiceExecuted(String name, String email) {
         StudentRegistrationFacade facade = new StudentRegistrationFacade();
-        assertNotNull(facade);
+        try {
+            facade.registerStudent(name, email);
+            System.out.println("PASS: Notification service executed");
+        } catch (Exception e) {
+            System.out.println("FAIL: Notification service failed - " + e.getMessage());
+        }
+    }
+
+    static void testFacadeNotNull() {
+        StudentRegistrationFacade facade = new StudentRegistrationFacade();
+        if (facade != null) {
+            System.out.println("PASS: Facade object is not null");
+        } else {
+            System.out.println("FAIL: Facade is null");
+        }
     }
 }

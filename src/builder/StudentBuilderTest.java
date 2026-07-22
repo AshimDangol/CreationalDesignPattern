@@ -1,81 +1,134 @@
 package builder;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Scanner;
 
-import org.junit.jupiter.api.Test;
+public class StudentBuilderTest {
 
-// JUnit 5 tests to verify Builder pattern behavior
-class StudentBuilderTest {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-    @Test
-    // Verify a fully built Student object is not null
-    void testStudentCreatedSuccessfully() {
+        System.out.println("=== StudentBuilder Test ===");
+
+        System.out.print("Enter student ID: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Enter name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter email: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Enter phone number: ");
+        String phone = scanner.nextLine();
+
+        System.out.print("Enter department: ");
+        String dept = scanner.nextLine();
+
+        System.out.print("Enter semester: ");
+        int sem = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Enter address: ");
+        String address = scanner.nextLine();
+
+        System.out.print("Enter guardian name: ");
+        String guardian = scanner.nextLine();
+
         Student student = new Student.Builder()
-                .studentId(101)
-                .name("Ram")
-                .email("ram@gmail.com")
-                .phoneNumber("9800000000")
-                .department("BCA")
-                .semester(5)
-                .address("Kathmandu")
-                .guardianName("Hari")
+                .studentId(id)
+                .name(name)
+                .email(email)
+                .phoneNumber(phone)
+                .department(dept)
+                .semester(sem)
+                .address(address)
+                .guardianName(guardian)
                 .build();
-        assertNotNull(student);
+
+        System.out.println("\n=== Test Results ===");
+        testStudentCreatedSuccessfully(student);
+        testStudentId(student, id);
+        testStudentName(student, name);
+        testDepartment(student, dept);
+        testSemester(student, sem);
+        testEmail(student, email);
+        testPhoneNumber(student, phone);
+        testAddress(student, address);
+        testGuardianName(student, guardian);
+
+        scanner.close();
     }
 
-    @Test
-    // Verify setting only studentId via Builder works
-    void testStudentId() {
-        Student student = new Student.Builder().studentId(101).build();
-        assertEquals(101, student.getStudentId());
+    static void testStudentCreatedSuccessfully(Student student) {
+        if (student != null) {
+            System.out.println("PASS: Student created successfully");
+        } else {
+            System.out.println("FAIL: Student is null");
+        }
     }
 
-    @Test
-    // Verify setting only name via Builder works
-    void testStudentName() {
-        Student student = new Student.Builder().name("Ram").build();
-        assertEquals("Ram", student.getName());
+    static void testStudentId(Student student, int expected) {
+        if (student.getStudentId() == expected) {
+            System.out.println("PASS: Student ID is " + expected);
+        } else {
+            System.out.println("FAIL: Expected " + expected + " but got " + student.getStudentId());
+        }
     }
 
-    @Test
-    // Verify setting only department via Builder works
-    void testDepartment() {
-        Student student = new Student.Builder().department("BCA").build();
-        assertEquals("BCA", student.getDepartment());
+    static void testStudentName(Student student, String expected) {
+        if (expected.equals(student.getName())) {
+            System.out.println("PASS: Name is " + expected);
+        } else {
+            System.out.println("FAIL: Expected " + expected + " but got " + student.getName());
+        }
     }
 
-    @Test
-    // Verify setting only semester via Builder works
-    void testSemester() {
-        Student student = new Student.Builder().semester(5).build();
-        assertEquals(5, student.getSemester());
+    static void testDepartment(Student student, String expected) {
+        if (expected.equals(student.getDepartment())) {
+            System.out.println("PASS: Department is " + expected);
+        } else {
+            System.out.println("FAIL: Expected " + expected + " but got " + student.getDepartment());
+        }
     }
 
-    @Test
-    // Verify setting only email via Builder works
-    void testEmail() {
-        Student student = new Student.Builder().email("ram@gmail.com").build();
-        assertEquals("ram@gmail.com", student.getEmail());
+    static void testSemester(Student student, int expected) {
+        if (student.getSemester() == expected) {
+            System.out.println("PASS: Semester is " + expected);
+        } else {
+            System.out.println("FAIL: Expected " + expected + " but got " + student.getSemester());
+        }
     }
 
-    @Test
-    // Verify setting only phoneNumber via Builder works
-    void testPhoneNumber() {
-        Student student = new Student.Builder().phoneNumber("9800000000").build();
-        assertEquals("9800000000", student.getPhoneNumber());
+    static void testEmail(Student student, String expected) {
+        if (expected.equals(student.getEmail())) {
+            System.out.println("PASS: Email is " + expected);
+        } else {
+            System.out.println("FAIL: Expected " + expected + " but got " + student.getEmail());
+        }
     }
 
-    @Test
-    // Verify setting only address via Builder works
-    void testAddress() {
-        Student student = new Student.Builder().address("Kathmandu").build();
-        assertEquals("Kathmandu", student.getAddress());
+    static void testPhoneNumber(Student student, String expected) {
+        if (expected.equals(student.getPhoneNumber())) {
+            System.out.println("PASS: Phone is " + expected);
+        } else {
+            System.out.println("FAIL: Expected " + expected + " but got " + student.getPhoneNumber());
+        }
     }
 
-    @Test
-    // Verify setting only guardianName via Builder works
-    void testGuardianName() {
-        Student student = new Student.Builder().guardianName("Hari").build();
-        assertEquals("Hari", student.getGuardianName());
+    static void testAddress(Student student, String expected) {
+        if (expected.equals(student.getAddress())) {
+            System.out.println("PASS: Address is " + expected);
+        } else {
+            System.out.println("FAIL: Expected " + expected + " but got " + student.getAddress());
+        }
+    }
+
+    static void testGuardianName(Student student, String expected) {
+        if (expected.equals(student.getGuardianName())) {
+            System.out.println("PASS: Guardian is " + expected);
+        } else {
+            System.out.println("FAIL: Expected " + expected + " but got " + student.getGuardianName());
+        }
     }
 }

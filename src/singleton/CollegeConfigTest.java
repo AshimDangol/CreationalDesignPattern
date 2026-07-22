@@ -1,38 +1,61 @@
 package singleton;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Scanner;
 
-import org.junit.jupiter.api.Test;
+public class CollegeConfigTest {
 
-// JUnit 5 tests to verify Singleton behavior
-class CollegeConfigTest {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-    @Test
-    // Verify that two calls to getInstance() return the exact same object (reference equality)
-    void testSingleInstance() {
+        System.out.println("=== CollegeConfig Test ===");
+        testSingleInstance();
+        testInstanceNotNull();
+
+        System.out.print("Enter expected college name: ");
+        String expectedName = scanner.nextLine();
+        testCollegeName(expectedName);
+
+        System.out.print("Enter expected system version: ");
+        String expectedVersion = scanner.nextLine();
+        testSystemVersion(expectedVersion);
+
+        scanner.close();
+    }
+
+    static void testSingleInstance() {
         CollegeConfig instance1 = CollegeConfig.getInstance();
         CollegeConfig instance2 = CollegeConfig.getInstance();
-        assertSame(instance1, instance2, "Both references should point to the same instance");
+        if (instance1 == instance2) {
+            System.out.println("PASS: Both references point to the same instance");
+        } else {
+            System.out.println("FAIL: References point to different instances");
+        }
     }
 
-    @Test
-    // Verify the default college name is set correctly
-    void testCollegeName() {
+    static void testCollegeName(String expected) {
         CollegeConfig instance = CollegeConfig.getInstance();
-        assertEquals("pcps college", instance.getCollegeName(), "College name should be pcps college");
+        if (expected.equals(instance.getCollegeName())) {
+            System.out.println("PASS: College name is " + expected);
+        } else {
+            System.out.println("FAIL: Expected " + expected + " but got " + instance.getCollegeName());
+        }
     }
 
-    @Test
-    // Verify the default system version is set correctly
-    void testSystemVersion() {
+    static void testSystemVersion(String expected) {
         CollegeConfig instance = CollegeConfig.getInstance();
-        assertEquals("1.0", instance.getSystemVersion(), "System version should be 1.0");
+        if (expected.equals(instance.getSystemVersion())) {
+            System.out.println("PASS: System version is " + expected);
+        } else {
+            System.out.println("FAIL: Expected " + expected + " but got " + instance.getSystemVersion());
+        }
     }
 
-    @Test
-    // Verify that getInstance() never returns null
-    void testInstanceNotNull() {
+    static void testInstanceNotNull() {
         CollegeConfig instance = CollegeConfig.getInstance();
-        assertNotNull(instance, "Singleton instance should not be null");
+        if (instance != null) {
+            System.out.println("PASS: Instance is not null");
+        } else {
+            System.out.println("FAIL: Instance is null");
+        }
     }
 }

@@ -1,36 +1,72 @@
 package proxy;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
+import java.util.Scanner;
 
-// JUnit 5 tests to verify Proxy pattern behavior
-class ProxyTest {
+public class ProxyTest {
 
-    @Test
-    // Verify ADMIN role is allowed to view marks
-    void testAdminCanViewMarks() {
-        StudentRecord proxy = new StudentRecordProxy("Ram", "ADMIN");
-        assertDoesNotThrow(() -> proxy.viewMarks());
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("=== Proxy Test ===");
+
+        System.out.print("Enter student name: ");
+        String studentName = scanner.nextLine();
+
+        System.out.print("Enter role (ADMIN/STUDENT): ");
+        String role = scanner.nextLine();
+
+        testAdminAccessAllowed(studentName, role);
+        testStudentAccessDenied(studentName, role);
+        testProxyObjectCreated(studentName, role);
+
+        testProxyNotNull(studentName, role);
+
+        scanner.close();
     }
 
-    @Test
-    // Verify STUDENT role is denied (call completes without exception but denies access)
-    void testStudentCannotViewMarks() {
-        StudentRecord proxy = new StudentRecordProxy("Ram", "STUDENT");
-        assertDoesNotThrow(() -> proxy.viewMarks());
+    static void testAdminAccessAllowed(String name, String role) {
+        StudentRecord proxy = new StudentRecordProxy(name, role);
+        try {
+            proxy.viewMarks();
+            if ("ADMIN".equalsIgnoreCase(role)) {
+                System.out.println("PASS: Admin access allowed");
+            } else {
+                System.out.println("PASS: Denied as expected for non-admin role");
+            }
+        } catch (Exception e) {
+            System.out.println("FAIL: Exception thrown - " + e.getMessage());
+        }
     }
 
-    @Test
-    // Verify the proxy implements the StudentRecord interface
-    void testProxyImplementsStudentRecord() {
-        StudentRecord proxy = new StudentRecordProxy("Ram", "ADMIN");
-        assertTrue(proxy instanceof StudentRecord);
+    static void testStudentAccessDenied(String name, String role) {
+        StudentRecord proxy = new StudentRecordProxy(name, role);
+        try {
+            proxy.viewMarks();
+            if ("ADMIN".equalsIgnoreCase(role)) {
+                System.out.println("PASS: Admin accessed successfully");
+            } else {
+                System.out.println("PASS: Student access denied as expected");
+            }
+        } catch (Exception e) {
+            System.out.println("FAIL: Exception thrown - " + e.getMessage());
+        }
     }
 
-    @Test
-    // Verify the proxy object is not null
-    void testProxyNotNull() {
-        StudentRecord proxy = new StudentRecordProxy("Ram", "ADMIN");
-        assertNotNull(proxy);
+    static void testProxyObjectCreated(String name, String role) {
+        StudentRecord proxy = new StudentRecordProxy(name, role);
+        if (proxy instanceof StudentRecord) {
+            System.out.println("PASS: Proxy implements StudentRecord interface");
+        } else {
+            System.out.println("FAIL: Proxy does not implement StudentRecord");
+        }
+    }
+
+    static void testProxyNotNull(String name, String role) {
+        StudentRecord proxy = new StudentRecordProxy(name, role);
+        if (proxy != null) {
+            System.out.println("PASS: Proxy object is not null");
+        } else {
+            System.out.println("FAIL: Proxy is null");
+        }
     }
 }

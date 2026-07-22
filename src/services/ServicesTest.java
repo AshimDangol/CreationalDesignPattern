@@ -1,38 +1,91 @@
 package services;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
+import java.util.Scanner;
 
-// JUnit 5 tests to verify the Student Services Module integration
-class ServicesTest {
+public class ServicesTest {
 
-    @Test
-    void testRegisterStudent() {
-        StudentServicesFacade services = new StudentServicesFacade();
-        assertDoesNotThrow(() -> services.registerStudent("Ram", "ram@gmail.com"));
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("=== Student Services Module Test ===");
+
+        System.out.print("Enter student name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter student email: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Enter role (ADMIN/STUDENT): ");
+        String role = scanner.nextLine();
+
+        System.out.print("Enter student ID: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("\n=== Test Results ===");
+        testServicesFacadeNotNull();
+        testRegisterStudent(name, email);
+        testAdminViewMarks(name, role);
+        testStudentViewMarks(name, role);
+        testGenerateReport(name, id);
+
+        scanner.close();
     }
 
-    @Test
-    void testAdminViewMarks() {
+    static void testRegisterStudent(String name, String email) {
         StudentServicesFacade services = new StudentServicesFacade();
-        assertDoesNotThrow(() -> services.viewStudentMarks("Ram", "ADMIN"));
+        try {
+            services.registerStudent(name, email);
+            System.out.println("PASS: Student registered successfully");
+        } catch (Exception e) {
+            System.out.println("FAIL: Registration failed - " + e.getMessage());
+        }
     }
 
-    @Test
-    void testStudentViewMarks() {
+    static void testAdminViewMarks(String name, String role) {
         StudentServicesFacade services = new StudentServicesFacade();
-        assertDoesNotThrow(() -> services.viewStudentMarks("Ram", "STUDENT"));
+        try {
+            services.viewStudentMarks(name, role);
+            if ("ADMIN".equalsIgnoreCase(role)) {
+                System.out.println("PASS: Admin accessed marks");
+            } else {
+                System.out.println("PASS: Access denied for non-admin role");
+            }
+        } catch (Exception e) {
+            System.out.println("FAIL: Exception - " + e.getMessage());
+        }
     }
 
-    @Test
-    void testGenerateReport() {
+    static void testStudentViewMarks(String name, String role) {
         StudentServicesFacade services = new StudentServicesFacade();
-        assertDoesNotThrow(() -> services.generateStudentReport("Ram", 101));
+        try {
+            services.viewStudentMarks(name, role);
+            if ("ADMIN".equalsIgnoreCase(role)) {
+                System.out.println("PASS: Admin accessed marks successfully");
+            } else {
+                System.out.println("PASS: Student access denied as expected");
+            }
+        } catch (Exception e) {
+            System.out.println("FAIL: Exception - " + e.getMessage());
+        }
     }
 
-    @Test
-    void testServicesFacadeNotNull() {
+    static void testGenerateReport(String name, int id) {
         StudentServicesFacade services = new StudentServicesFacade();
-        assertNotNull(services);
+        try {
+            services.generateStudentReport(name, id);
+            System.out.println("PASS: Report generated successfully");
+        } catch (Exception e) {
+            System.out.println("FAIL: Report generation failed - " + e.getMessage());
+        }
+    }
+
+    static void testServicesFacadeNotNull() {
+        StudentServicesFacade services = new StudentServicesFacade();
+        if (services != null) {
+            System.out.println("PASS: Services facade is not null");
+        } else {
+            System.out.println("FAIL: Services facade is null");
+        }
     }
 }

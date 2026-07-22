@@ -1,40 +1,63 @@
 package adapter;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
+import java.util.Scanner;
 
-// JUnit 5 tests to verify Adapter pattern behavior
-class AdapterTest {
+public class AdapterTest {
 
-    @Test
-    // Verify the adapter object is created successfully
-    void testAdapterObjectCreated() {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("=== Adapter Test ===");
+        testAdapterObjectCreated();
+        testAdapterNotNull();
+
+        System.out.print("Enter message to send via adapter: ");
+        String message = scanner.nextLine();
+        testAdapterDelegatesCorrectly(message);
+
+        testAdapterImplementsNotification();
+
+        scanner.close();
+    }
+
+    static void testAdapterObjectCreated() {
         LegacyEmailService oldService = new LegacyEmailService();
         Notification adapter = new EmailAdapter(oldService);
-        assertNotNull(adapter);
+        if (adapter != null) {
+            System.out.println("PASS: Adapter object created");
+        } else {
+            System.out.println("FAIL: Adapter is null");
+        }
     }
 
-    @Test
-    // Verify sendNotification() delegates to sendMail() without throwing exceptions
-    void testAdapterDelegatesCorrectly() {
+    static void testAdapterDelegatesCorrectly(String message) {
         LegacyEmailService oldService = new LegacyEmailService();
         EmailAdapter adapter = new EmailAdapter(oldService);
-        assertDoesNotThrow(() -> adapter.sendNotification("Test message"));
+        try {
+            adapter.sendNotification(message);
+            System.out.println("PASS: Notification sent successfully");
+        } catch (Exception e) {
+            System.out.println("FAIL: Exception thrown - " + e.getMessage());
+        }
     }
 
-    @Test
-    // Verify the adapter implements the Notification interface
-    void testAdapterImplementsNotification() {
+    static void testAdapterImplementsNotification() {
         LegacyEmailService oldService = new LegacyEmailService();
         Notification adapter = new EmailAdapter(oldService);
-        assertTrue(adapter instanceof Notification);
+        if (adapter instanceof Notification) {
+            System.out.println("PASS: Adapter implements Notification interface");
+        } else {
+            System.out.println("FAIL: Adapter does not implement Notification");
+        }
     }
 
-    @Test
-    // Verify the adapter object is not null
-    void testAdapterNotNull() {
+    static void testAdapterNotNull() {
         LegacyEmailService oldService = new LegacyEmailService();
         EmailAdapter adapter = new EmailAdapter(oldService);
-        assertNotNull(adapter);
+        if (adapter != null) {
+            System.out.println("PASS: Adapter is not null");
+        } else {
+            System.out.println("FAIL: Adapter is null");
+        }
     }
 }
