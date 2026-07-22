@@ -1,3 +1,18 @@
+# Build outputs
 out/
+target/
+*.class
+
+# IDE files
 .idea/
 *.iml
+.vscode/
+*.swp
+*.swo
+
+# Maven Wrapper JAR (download on first run)
+.mvn/wrapper/maven-wrapper.jar
+
+# OS files
+.DS_Store
+Thumbs.db
