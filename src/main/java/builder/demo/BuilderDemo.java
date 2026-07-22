@@ -1,4 +1,6 @@
-package builder;
+package builder.demo;
+
+import builder.Student;
 
 // Demo showing the Builder fix: fluent API makes object creation clear and flexible
 // Each setter reveals what value it sets — self-documenting code

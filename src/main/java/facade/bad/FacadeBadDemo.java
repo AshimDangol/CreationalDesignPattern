@@ -1,4 +1,10 @@
-package facade;
+package facade.bad;
+
+import facade.DepartmentAssigner;
+import facade.RollNumberAssigner;
+import facade.StudentSaver;
+import facade.StudentValidator;
+import facade.WelcomeMessageSender;
 
 // Bad design: client code must know about and coordinate all subsystem classes
 // Adding or changing a step means editing every client that does registration

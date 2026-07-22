@@ -1,4 +1,6 @@
-package facade;
+package facade.demo;
+
+import facade.StudentRegistrationFacade;
 
 // Demo showing the Facade fix: one simple method call hides the subsystem complexity
 // Client code is decoupled from StudentValidator, RollNumberAssigner, etc.

@@ -1,5 +1,6 @@
-package admission;
+package admission.demo;
 
+import admission.AdmissionService;
 import builder.Student;
 
 // Demo for the admission flow — integrates Singleton, Builder, and Factory patterns

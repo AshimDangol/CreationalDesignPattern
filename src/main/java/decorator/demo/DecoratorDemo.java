@@ -1,4 +1,10 @@
-package decorator;
+package decorator.demo;
+
+import decorator.BasicStudentReport;
+import decorator.PdfDecorator;
+import decorator.SignatureDecorator;
+import decorator.StudentReport;
+import decorator.WatermarkDecorator;
 
 // Demo showing the Decorator fix: features are added at runtime by wrapping objects
 // Each decorator adds a new capability without modifying existing classes

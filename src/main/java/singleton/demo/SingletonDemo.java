@@ -1,4 +1,6 @@
-package singleton;
+package singleton.demo;
+
+import singleton.CollegeConfig;
 
 // Demo showing the Singleton fix: both references point to the same object
 public class SingletonDemo {

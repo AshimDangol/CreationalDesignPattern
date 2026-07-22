@@ -1,4 +1,8 @@
-package adapter;
+package adapter.demo;
+
+import adapter.EmailAdapter;
+import adapter.LegacyEmailService;
+import adapter.Notification;
 
 // Demo showing the Adapter fix: EmailAdapter bridges the incompatible interface
 // Client code calls sendNotification() — the adapter translates it to sendMail()

@@ -1,4 +1,6 @@
-package singleton;
+package singleton.bad;
+
+import singleton.CollegeConfigBad;
 
 // Demo showing the problem: calling 'new' twice creates two separate objects
 public class SingletonBadDemo {

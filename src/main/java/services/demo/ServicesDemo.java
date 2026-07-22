@@ -1,4 +1,6 @@
-package services;
+package services.demo;
+
+import services.StudentServicesFacade;
 
 // Demo for the Student Services Module — integrates all 4 structural design patterns
 public class ServicesDemo {

@@ -38,8 +38,14 @@ def read_src(filename):
     with open(path, 'r', encoding='utf-8') as f:
         return f.read()
 
-# Maven standard directory: src/main/java
+def read_test(filename):
+    path = os.path.join(test_base, filename)
+    with open(path, 'r', encoding='utf-8') as f:
+        return f.read()
+
+# Maven standard directories
 base = r'C:\Users\DeathAngel\Documents\Java\Creational Design Pattern\src\main\java'
+test_base = r'C:\Users\DeathAngel\Documents\Java\Creational Design Pattern\src\test\java'
 
 # ===== TITLE =====
 for _ in range(6):
@@ -98,7 +104,7 @@ doc.add_heading('Bad Design Code', level=3)
 add(doc, 'File: CollegeConfigBad.java')
 add_code(doc, read_src('singleton/CollegeConfigBad.java'))
 add(doc, 'File: SingletonBadDemo.java')
-add_code(doc, read_src('singleton/SingletonBadDemo.java'))
+add_code(doc, read_src('singleton/bad/SingletonBadDemo.java'))
 
 doc.add_heading('Part B: Analysis Questions', level=2)
 doc.add_heading('Q1. How many objects are created?', level=3)
@@ -129,7 +135,7 @@ for i in ['Private constructor prevents external instantiation.',
 add(doc, 'File: CollegeConfig.java')
 add_code(doc, read_src('singleton/CollegeConfig.java'))
 add(doc, 'File: SingletonDemo.java')
-add_code(doc, read_src('singleton/SingletonDemo.java'))
+add_code(doc, read_src('singleton/demo/SingletonDemo.java'))
 
 doc.add_heading('Clean Code Explanation', level=2)
 for c in ['Eager Initialization: The instance is created at class load time by the JVM, which is thread-safe without synchronization.',
@@ -141,7 +147,7 @@ for c in ['Eager Initialization: The instance is created at class load time by t
 
 doc.add_heading('Test Cases', level=2)
 add(doc, 'File: CollegeConfigTest.java')
-add_code(doc, read_src('singleton/CollegeConfigTest.java'))
+add_code(doc, read_test('singleton/CollegeConfigTest.java'))
 add(doc, 'Test Descriptions:')
 for t in ['testSingleInstance(): Verifies that two calls to getInstance() return the exact same object (reference equality).',
            'testCollegeName(): Verifies the default college name is "pcps college".',
@@ -178,7 +184,7 @@ doc.add_heading('Bad Design Code', level=3)
 add(doc, 'File: NotificationServiceBad.java')
 add_code(doc, read_src('factory/NotificationServiceBad.java'))
 add(doc, 'File: FactoryBadDemo.java')
-add_code(doc, read_src('factory/FactoryBadDemo.java'))
+add_code(doc, read_src('factory/bad/FactoryBadDemo.java'))
 
 doc.add_heading('Part B: Analysis Questions', level=2)
 doc.add_heading('Q1. How does the program decide which notification type to send?', level=3)
@@ -217,7 +223,7 @@ add_code(doc, read_src('factory/PushNotification.java'))
 add(doc, 'File: NotificationFactory.java')
 add_code(doc, read_src('factory/NotificationFactory.java'))
 add(doc, 'File: FactoryDemo.java')
-add_code(doc, read_src('factory/FactoryDemo.java'))
+add_code(doc, read_src('factory/demo/FactoryDemo.java'))
 
 doc.add_heading('Clean Code Explanation', level=2)
 for c in ['Single Responsibility: NotificationFactory only creates objects. Each Notification subclass only sends messages.',
@@ -228,7 +234,7 @@ for c in ['Single Responsibility: NotificationFactory only creates objects. Each
 
 doc.add_heading('Test Cases', level=2)
 add(doc, 'File: NotificationFactoryTest.java')
-add_code(doc, read_src('factory/NotificationFactoryTest.java'))
+add_code(doc, read_test('factory/NotificationFactoryTest.java'))
 add(doc, 'Test Descriptions:')
 for t in ['testEmailNotification(): Verifies factory returns an EmailNotification for "EMAIL".',
            'testSmsNotification(): Verifies factory returns an SmsNotification for "SMS".',
@@ -266,7 +272,7 @@ doc.add_heading('Bad Design Code', level=3)
 add(doc, 'File: StudentBad.java')
 add_code(doc, read_src('builder/StudentBad.java'))
 add(doc, 'File: BuilderBadDemo.java')
-add_code(doc, read_src('builder/BuilderBadDemo.java'))
+add_code(doc, read_src('builder/bad/BuilderBadDemo.java'))
 
 doc.add_heading('Part B: Analysis Questions', level=2)
 doc.add_heading('Q1. How is the Student object created in the current implementation?', level=3)
@@ -297,7 +303,7 @@ for i in ['Fluent method chaining with named setters makes each field explicit.'
 add(doc, 'File: Student.java')
 add_code(doc, read_src('builder/Student.java'))
 add(doc, 'File: BuilderDemo.java')
-add_code(doc, read_src('builder/BuilderDemo.java'))
+add_code(doc, read_src('builder/demo/BuilderDemo.java'))
 
 doc.add_heading('Clean Code Explanation', level=2)
 for c in ['Fluent API: Each setter returns this, enabling readable method chaining.',
@@ -309,7 +315,7 @@ for c in ['Fluent API: Each setter returns this, enabling readable method chaini
 
 doc.add_heading('Test Cases', level=2)
 add(doc, 'File: StudentBuilderTest.java')
-add_code(doc, read_src('builder/StudentBuilderTest.java'))
+add_code(doc, read_test('builder/StudentBuilderTest.java'))
 add(doc, 'Test Descriptions:')
 for t in ['testStudentCreatedSuccessfully(): Verifies a fully built Student object is not null.',
            'testStudentId(): Verifies studentId is set correctly via Builder.',
@@ -351,7 +357,7 @@ for i in ['Bad design code', 'Problems in bad design', 'Refactored good design u
 
 doc.add_heading('Bad Design Code', level=3)
 add(doc, 'File: AdapterBadDemo.java')
-add_code(doc, read_src('adapter/AdapterBadDemo.java'))
+add_code(doc, read_src('adapter/bad/AdapterBadDemo.java'))
 
 doc.add_heading('Part B: Analysis Questions', level=2)
 doc.add_heading('Q1. Why cant the notification system directly use the legacy email service?', level=3)
@@ -386,7 +392,7 @@ add_code(doc, read_src('adapter/LegacyEmailService.java'))
 add(doc, 'File: EmailAdapter.java')
 add_code(doc, read_src('adapter/EmailAdapter.java'))
 add(doc, 'File: AdapterDemo.java')
-add_code(doc, read_src('adapter/AdapterDemo.java'))
+add_code(doc, read_src('adapter/demo/AdapterDemo.java'))
 
 doc.add_heading('Clean Code Explanation', level=2)
 for c in ['Single Responsibility: EmailAdapter only handles interface conversion.',
@@ -397,7 +403,7 @@ for c in ['Single Responsibility: EmailAdapter only handles interface conversion
 
 doc.add_heading('Test Cases', level=2)
 add(doc, 'File: AdapterTest.java')
-add_code(doc, read_src('adapter/AdapterTest.java'))
+add_code(doc, read_test('adapter/AdapterTest.java'))
 add(doc, 'Test Descriptions:')
 for t in ['testAdapterObjectCreated(): Verifies the adapter object is created successfully.',
            'testAdapterDelegatesCorrectly(): Verifies sendNotification() delegates to sendMail() without exceptions.',
@@ -432,7 +438,7 @@ for i in ['Bad design code', 'Problems in bad design', 'Refactored good design u
 
 doc.add_heading('Bad Design Code', level=3)
 add(doc, 'File: FacadeBadDemo.java')
-add_code(doc, read_src('facade/FacadeBadDemo.java'))
+add_code(doc, read_src('facade/bad/FacadeBadDemo.java'))
 
 doc.add_heading('Part B: Analysis Questions', level=2)
 doc.add_heading('Q1. How many services are required to register a student?', level=3)
@@ -470,7 +476,7 @@ add_code(doc, read_src('facade/WelcomeMessageSender.java'))
 add(doc, 'File: StudentRegistrationFacade.java')
 add_code(doc, read_src('facade/StudentRegistrationFacade.java'))
 add(doc, 'File: FacadeDemo.java')
-add_code(doc, read_src('facade/FacadeDemo.java'))
+add_code(doc, read_src('facade/demo/FacadeDemo.java'))
 
 doc.add_heading('Clean Code Explanation', level=2)
 for c in ['Single Responsibility: The facade coordinates subsystems; each subsystem has one job.',
@@ -481,7 +487,7 @@ for c in ['Single Responsibility: The facade coordinates subsystems; each subsys
 
 doc.add_heading('Test Cases', level=2)
 add(doc, 'File: FacadeTest.java')
-add_code(doc, read_src('facade/FacadeTest.java'))
+add_code(doc, read_test('facade/FacadeTest.java'))
 add(doc, 'Test Descriptions:')
 for t in ['testRegistrationStartsSuccessfully(): Verifies registration starts without exceptions.',
            'testValidationServiceExecuted(): Verifies validation service is executed (throws for invalid data).',
@@ -518,7 +524,7 @@ for i in ['Bad design code', 'Problems in bad design', 'Refactored good design u
 
 doc.add_heading('Bad Design Code', level=3)
 add(doc, 'File: ProxyBadDemo.java')
-add_code(doc, read_src('proxy/ProxyBadDemo.java'))
+add_code(doc, read_src('proxy/bad/ProxyBadDemo.java'))
 
 doc.add_heading('Part B: Analysis Questions', level=2)
 doc.add_heading('Q1. Who can currently access student records?', level=3)
@@ -553,7 +559,7 @@ add_code(doc, read_src('proxy/RealStudentRecord.java'))
 add(doc, 'File: StudentRecordProxy.java')
 add_code(doc, read_src('proxy/StudentRecordProxy.java'))
 add(doc, 'File: ProxyDemo.java')
-add_code(doc, read_src('proxy/ProxyDemo.java'))
+add_code(doc, read_src('proxy/demo/ProxyDemo.java'))
 
 doc.add_heading('Clean Code Explanation', level=2)
 for c in ['Single Responsibility: Proxy handles access control; RealStudentRecord handles data.',
@@ -564,7 +570,7 @@ for c in ['Single Responsibility: Proxy handles access control; RealStudentRecor
 
 doc.add_heading('Test Cases', level=2)
 add(doc, 'File: ProxyTest.java')
-add_code(doc, read_src('proxy/ProxyTest.java'))
+add_code(doc, read_test('proxy/ProxyTest.java'))
 add(doc, 'Test Descriptions:')
 for t in ['testAdminAccessAllowed(): Verifies ADMIN role is allowed to view marks.',
            'testStudentAccessDenied(): Verifies STUDENT role is denied.',
@@ -600,7 +606,7 @@ for i in ['Bad design code', 'Problems in bad design', 'Refactored good design u
 
 doc.add_heading('Bad Design Code', level=3)
 add(doc, 'File: DecoratorBadDemo.java')
-add_code(doc, read_src('decorator/DecoratorBadDemo.java'))
+add_code(doc, read_src('decorator/bad/DecoratorBadDemo.java'))
 
 doc.add_heading('Part B: Analysis Questions', level=2)
 doc.add_heading('Q1. Why are many report classes being created?', level=3)
@@ -638,7 +644,7 @@ add_code(doc, read_src('decorator/WatermarkDecorator.java'))
 add(doc, 'File: SignatureDecorator.java')
 add_code(doc, read_src('decorator/SignatureDecorator.java'))
 add(doc, 'File: DecoratorDemo.java')
-add_code(doc, read_src('decorator/DecoratorDemo.java'))
+add_code(doc, read_src('decorator/demo/DecoratorDemo.java'))
 
 doc.add_heading('Clean Code Explanation', level=2)
 for c in ['Single Responsibility: Each decorator adds exactly one feature.',
@@ -649,7 +655,7 @@ for c in ['Single Responsibility: Each decorator adds exactly one feature.',
 
 doc.add_heading('Test Cases', level=2)
 add(doc, 'File: DecoratorTest.java')
-add_code(doc, read_src('decorator/DecoratorTest.java'))
+add_code(doc, read_test('decorator/DecoratorTest.java'))
 add(doc, 'Test Descriptions:')
 for t in ['testBasicReportGeneration(): Verifies basic report generation works.',
            'testPdfFeatureWorks(): Verifies PDF feature works when decorated.',
@@ -692,9 +698,9 @@ doc.add_heading('Integration Code', level=2)
 add(doc, 'File: AdmissionService.java')
 add_code(doc, read_src('admission/AdmissionService.java'))
 add(doc, 'File: AdmissionDemo.java')
-add_code(doc, read_src('admission/AdmissionDemo.java'))
+add_code(doc, read_src('admission/demo/AdmissionDemo.java'))
 add(doc, 'File: AdmissionTest.java')
-add_code(doc, read_src('admission/AdmissionTest.java'))
+add_code(doc, read_test('admission/AdmissionTest.java'))
 
 doc.add_heading('How the Patterns Collaborate', level=2)
 for c in ['Singleton (CollegeConfig): Single configuration instance for the admission process.',
@@ -741,9 +747,9 @@ doc.add_heading('Integration Code', level=2)
 add(doc, 'File: StudentServicesFacade.java')
 add_code(doc, read_src('services/StudentServicesFacade.java'))
 add(doc, 'File: ServicesDemo.java')
-add_code(doc, read_src('services/ServicesDemo.java'))
+add_code(doc, read_src('services/demo/ServicesDemo.java'))
 add(doc, 'File: ServicesTest.java')
-add_code(doc, read_src('services/ServicesTest.java'))
+add_code(doc, read_test('services/ServicesTest.java'))
 
 doc.add_heading('How the Patterns Collaborate', level=2)
 for c in ['Facade (StudentRegistrationFacade): Simplifies multi-step registration into a single method.',

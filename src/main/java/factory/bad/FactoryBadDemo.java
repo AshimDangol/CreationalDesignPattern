@@ -1,4 +1,6 @@
-package factory;
+package factory.bad;
+
+import factory.NotificationServiceBad;
 
 // Demo showing the problem: instance creation and business logic are mixed together
 // Adding a new type means editing NotificationServiceBad itself

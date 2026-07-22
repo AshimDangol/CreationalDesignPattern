@@ -1,4 +1,6 @@
-package decorator;
+package decorator.bad;
+
+import decorator.BasicStudentReport;
 
 // Bad design: to add PDF, watermark, or signature, you must modify BasicStudentReport
 // Each new feature requires editing the class — violates Open/Closed Principle

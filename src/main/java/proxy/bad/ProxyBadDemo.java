@@ -1,4 +1,6 @@
-package proxy;
+package proxy.bad;
+
+import proxy.RealStudentRecord;
 
 // Bad design: access control logic is mixed into client code
 // Every place that views marks must duplicate this if-else check

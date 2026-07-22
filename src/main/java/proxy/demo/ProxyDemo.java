@@ -1,4 +1,7 @@
-package proxy;
+package proxy.demo;
+
+import proxy.StudentRecord;
+import proxy.StudentRecordProxy;
 
 // Demo showing the Proxy fix: access control is centralized in StudentRecordProxy
 // Client code depends only on StudentRecord interface — no role-checking clutter

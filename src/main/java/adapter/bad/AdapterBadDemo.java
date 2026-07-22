@@ -1,4 +1,6 @@
-package adapter;
+package adapter.bad;
+
+import adapter.LegacyEmailService;
 
 // Bad design: client calls the legacy sendMail() directly
 // If the system expects sendNotification(), this code breaks — interfaces are incompatible

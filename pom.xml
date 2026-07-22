@@ -43,7 +43,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>services.ServicesDemo</mainClass>
+                            <mainClass>services.demo.ServicesDemo</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

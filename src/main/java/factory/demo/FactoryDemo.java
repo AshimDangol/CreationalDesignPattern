@@ -1,4 +1,7 @@
-package factory;
+package factory.demo;
+
+import factory.Notification;
+import factory.NotificationFactory;
 
 // Demo showing the Factory fix: creation logic is centralized in the factory
 // Client code only depends on the Notification interface
