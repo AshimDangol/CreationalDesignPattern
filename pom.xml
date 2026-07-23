@@ -10,21 +10,14 @@
     <packaging>jar</packaging>
 
     <name>Design Patterns Practical Report</name>
-    <description>Singleton, Factory Method, Builder, Adapter, Facade, Proxy, Decorator patterns</description>
+    <description>Creational, Structural and Behavioral design patterns with good/bad demos and Scanner-based tests</description>
 
     <properties>
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>5.11.0</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+    <dependencies/>
 
     <build>
         <plugins>

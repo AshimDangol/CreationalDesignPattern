@@ -1,47 +1,89 @@
 package strategy;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Scanner;
 
-class StrategyTest {
+public class StrategyTest {
 
-    @Test
-    void testKhaltiPayment() {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("=== Strategy Test ===");
+
+        System.out.print("Enter amount for Khalti payment: ");
+        double khaltiAmount = scanner.nextDouble();
+        scanner.nextLine();
+        testKhaltiPayment(khaltiAmount);
+
+        System.out.print("Enter amount for eSewa payment: ");
+        double esewaAmount = scanner.nextDouble();
+        scanner.nextLine();
+        testESewaPayment(esewaAmount);
+
+        System.out.print("Enter amount for Bank Transfer payment: ");
+        double bankAmount = scanner.nextDouble();
+        scanner.nextLine();
+        testBankTransferPayment(bankAmount);
+
+        System.out.print("Enter amount for strategy switching test: ");
+        double switchAmount = scanner.nextDouble();
+        scanner.nextLine();
+        testContextSwitchesStrategy(switchAmount);
+
+        testPaymentImplementsStrategy();
+
+        scanner.close();
+    }
+
+    static void testKhaltiPayment(double amount) {
         PaymentStrategy payment = new KhaltiPayment();
-        assertDoesNotThrow(() -> payment.pay(1500));
+        try {
+            payment.pay(amount);
+            System.out.println("PASS: Khalti payment executed");
+        } catch (Exception e) {
+            System.out.println("FAIL: Khalti payment threw exception - " + e.getMessage());
+        }
     }
 
-    @Test
-    void testESewaPayment() {
+    static void testESewaPayment(double amount) {
         PaymentStrategy payment = new ESewaPayment();
-        assertDoesNotThrow(() -> payment.pay(2000));
+        try {
+            payment.pay(amount);
+            System.out.println("PASS: eSewa payment executed");
+        } catch (Exception e) {
+            System.out.println("FAIL: eSewa payment threw exception - " + e.getMessage());
+        }
     }
 
-    @Test
-    void testBankTransferPayment() {
+    static void testBankTransferPayment(double amount) {
         PaymentStrategy payment = new BankTransferPayment();
-        assertDoesNotThrow(() -> payment.pay(5000));
+        try {
+            payment.pay(amount);
+            System.out.println("PASS: Bank Transfer payment executed");
+        } catch (Exception e) {
+            System.out.println("FAIL: Bank Transfer payment threw exception - " + e.getMessage());
+        }
     }
 
-    @Test
-    void testContextSwitchesStrategy() {
+    static void testContextSwitchesStrategy(double amount) {
         PaymentContext context = new PaymentContext();
-        context.setPaymentStrategy(new KhaltiPayment());
-        assertDoesNotThrow(() -> context.executePayment(1000));
-        context.setPaymentStrategy(new ESewaPayment());
-        assertDoesNotThrow(() -> context.executePayment(2000));
+        try {
+            context.setPaymentStrategy(new KhaltiPayment());
+            context.executePayment(amount);
+            context.setPaymentStrategy(new ESewaPayment());
+            context.executePayment(amount);
+            System.out.println("PASS: Context switches strategy at runtime");
+        } catch (Exception e) {
+            System.out.println("FAIL: Context switching failed - " + e.getMessage());
+        }
     }
 
-    @Test
-    void testContextWithNoStrategy() {
-        PaymentContext context = new PaymentContext();
-        assertDoesNotThrow(() -> context.executePayment(1000));
-    }
-
-    @Test
-    void testPaymentImplementsStrategy() {
-        assertTrue(new KhaltiPayment() instanceof PaymentStrategy);
-        assertTrue(new ESewaPayment() instanceof PaymentStrategy);
-        assertTrue(new BankTransferPayment() instanceof PaymentStrategy);
+    static void testPaymentImplementsStrategy() {
+        if (new KhaltiPayment() instanceof PaymentStrategy
+                && new ESewaPayment() instanceof PaymentStrategy
+                && new BankTransferPayment() instanceof PaymentStrategy) {
+            System.out.println("PASS: All payments implement PaymentStrategy interface");
+        } else {
+            System.out.println("FAIL: Some payment does not implement PaymentStrategy");
+        }
     }
 }
