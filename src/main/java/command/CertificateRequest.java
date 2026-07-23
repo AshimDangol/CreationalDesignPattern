@@ -1,5 +1,6 @@
 package command;
 
+// Concrete command: handles certificate request for a student
 public class CertificateRequest implements ServiceRequest {
     private String studentName;
 

@@ -5,6 +5,8 @@ import observer.ParentNotifier;
 import observer.ResultPublisher;
 import observer.StudentNotifier;
 
+// Demo showing the Observer pattern: multiple parties are notified when results are published
+// Observers can be added or removed without modifying the publisher
 public class ObserverDemo {
     public static void main(String[] args) {
         ResultPublisher publisher = new ResultPublisher();

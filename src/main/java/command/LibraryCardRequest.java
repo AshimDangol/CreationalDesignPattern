@@ -1,5 +1,6 @@
 package command;
 
+// Concrete command: handles library card request for a student
 public class LibraryCardRequest implements ServiceRequest {
     private String studentName;
 

@@ -1,5 +1,7 @@
 package state.bad;
 
+// Bad design: state is managed using an int field with if-else and switch statements
+// Adding a new state or changing transitions requires modifying multiple methods
 public class ApplicationManagerBad {
     private int state; // 0=Submitted, 1=Verified, 2=Approved, 3=Enrolled
 
@@ -7,6 +9,7 @@ public class ApplicationManagerBad {
         this.state = 0;
     }
 
+    // State transitions are scattered in if-else — hard to read and extend
     public void next() {
         if (state == 0) {
             System.out.println("Application submitted — moving to Verified");
@@ -22,6 +25,7 @@ public class ApplicationManagerBad {
         }
     }
 
+    // State name mapping requires a separate switch — duplicated logic
     public String getCurrentState() {
         switch (state) {
             case 0: return "Submitted";

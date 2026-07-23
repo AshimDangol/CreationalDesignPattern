@@ -1,5 +1,6 @@
 package observer;
 
+// Concrete observer: notifies the student when results are published
 public class StudentNotifier implements Observer {
     private String studentName;
 

@@ -1,5 +1,7 @@
 package state;
 
+// Concrete state: represents the Approved stage after review
+// Transitions to Enrolled to finalize the admission
 public class ApprovedState implements ApplicationState {
     private ApplicationContext context;
 

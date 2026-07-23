@@ -1,5 +1,7 @@
 package state;
 
+// Concrete state: represents the final Enrolled stage — admission is complete
+// Terminal state — no further transitions (handle is a no-op)
 public class EnrolledState implements ApplicationState {
     private ApplicationContext context;
 

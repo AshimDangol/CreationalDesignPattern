@@ -1,5 +1,6 @@
 package observer;
 
+// Concrete observer: notifies the academic department when results are published
 public class DepartmentNotifier implements Observer {
     private String department;
 

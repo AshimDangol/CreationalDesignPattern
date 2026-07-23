@@ -1,5 +1,6 @@
 package command;
 
+// Concrete command: handles ID card request for a student
 public class IdCardRequest implements ServiceRequest {
     private String studentName;
 

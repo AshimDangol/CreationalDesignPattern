@@ -1,7 +1,10 @@
 package strategy.bad;
 
+// Bad design: payment logic is hardcoded with if-else chains
+// Adding a new payment method requires modifying this class (violates Open/Closed)
 public class FeeProcessorBad {
 
+    // Hardcoded branching — every new payment method means another else-if
     public void processFee(String method, double amount) {
         if ("KHALTI".equalsIgnoreCase(method)) {
             System.out.println("Paid NPR " + amount + " via Khalti");

@@ -1,5 +1,7 @@
 package state;
 
+// Concrete state: represents the initial Submitted stage
+// Transitions to Verified after processing
 public class SubmittedState implements ApplicationState {
     private ApplicationContext context;
 
