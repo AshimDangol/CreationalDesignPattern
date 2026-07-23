@@ -9,23 +9,25 @@ public class NotificationFactoryTest {
 
         System.out.println("=== NotificationFactory Test ===");
 
-        System.out.print("Enter notification type for Email (e.g., EMAIL): ");
+        System.out.println("Enter notification types exactly: EMAIL, SMS, PUSH, or something invalid.\n");
+
+        System.out.print("Enter type (EMAIL) to create EmailNotification: ");
         String emailType = scanner.nextLine();
         testEmailNotification(emailType);
 
-        System.out.print("Enter notification type for SMS (e.g., SMS): ");
+        System.out.print("Enter type (SMS) to create SmsNotification: ");
         String smsType = scanner.nextLine();
         testSmsNotification(smsType);
 
-        System.out.print("Enter notification type for Push (e.g., PUSH): ");
+        System.out.print("Enter type (PUSH) to create PushNotification: ");
         String pushType = scanner.nextLine();
         testPushNotification(pushType);
 
-        System.out.print("Enter notification type to verify not null: ");
+        System.out.print("Enter a valid type (EMAIL/SMS/PUSH) to verify non-null: ");
         String notNullType = scanner.nextLine();
         testNotificationNotNull(notNullType);
 
-        System.out.print("Enter invalid notification type to test exception: ");
+        System.out.print("Enter an invalid type (e.g. FAX) to test exception: ");
         String invalidType = scanner.nextLine();
         testInvalidTypeThrowsException(invalidType);
 
